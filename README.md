@@ -1,6 +1,6 @@
 # NewLine PCB — Static Site
 
-Bilingual (English / Hebrew) brochure site for [NewLine PCB Ltd.](https://newline-pcb.com), built with [Eleventy](https://www.11ty.dev/) and deployed to GitHub Pages.
+Bilingual (English / Hebrew) brochure site for [NewLine PCB Ltd.](https://newline-pcb.com), built with [Eleventy](https://www.11ty.dev/) and deployed to [Cloudflare Pages](https://pages.cloudflare.com/).
 
 ## Quick start
 
@@ -62,72 +62,79 @@ Until you've done this, the form will display an error if anyone tries to submit
 
 ## Deploying
 
-Pushing to the `main` branch automatically builds and deploys to GitHub Pages via `.github/workflows/deploy.yml`. No manual steps.
+Pushing to the `main` branch automatically triggers a Cloudflare Pages build and deploy. No GitHub Action needed — Cloudflare watches the GitHub repo directly.
 
-First-time GitHub Pages setup (in the repo on github.com):
+Build settings (configured once in the Cloudflare dashboard):
 
-1. **Settings → Pages → Source**: select **GitHub Actions**.
-2. **Settings → Pages → Custom domain**: enter `newline-pcb.com` (this matches the `src/CNAME` file).
-3. After DNS is configured (see below), tick **Enforce HTTPS**.
+| Setting              | Value         |
+|----------------------|---------------|
+| Framework preset     | None          |
+| Build command        | `npm run build` |
+| Build output directory | `_site`     |
+| Root directory       | (leave empty) |
+| Node version (env var `NODE_VERSION`) | `20` |
+
+## First-time Cloudflare Pages setup
+
+1. Sign in (or sign up — free) at https://dash.cloudflare.com/.
+2. **Compute (Workers & Pages)** → **Create** → **Pages** → **Connect to Git**.
+3. Authorize Cloudflare to access GitHub, then select the `newline-pcb-site` repository.
+4. **Set up builds and deployments**:
+   - Project name: `newline-pcb`
+   - Production branch: `main`
+   - Framework preset: **None**
+   - Build command: `npm run build`
+   - Build output directory: `_site`
+   - Add environment variable: `NODE_VERSION` = `20`
+5. **Save and Deploy**. The first build takes ~1–2 min. Cloudflare will give you a URL like `https://newline-pcb.pages.dev`.
+6. After it's green, go to **Custom domains** → **Set up a custom domain** → enter `newline-pcb.com`. Cloudflare will instruct you on the DNS record to add (see below).
 
 ## Domain (DNS) setup
 
-Currently `newline-pcb.com` resolves through the old Duda site. To repoint to GitHub Pages:
+There are two paths, depending on whether the domain's nameservers are at the original registrar or moved to Cloudflare.
 
-### 1. Pre-flight (24 hours before cutover)
+### Path A: Move the domain to Cloudflare DNS (recommended, simplest)
 
-At the domain registrar, lower the TTL on existing A/CNAME records to **300 seconds (5 minutes)**. This shortens propagation when you flip the records.
+This is the easiest and fastest path because Cloudflare adds the right records automatically.
 
-Verify your **MX records** (email routing) are NOT pointing to Duda — if `info@newline-pcb.com` is hosted by Duda's mail, you need to migrate email first. If MX points to Google, Microsoft 365, or another provider, you're good.
+1. In Cloudflare dashboard: **Add a Site** → enter `newline-pcb.com` → choose **Free plan**.
+2. Cloudflare will scan your existing DNS and import all current records (including MX for email — important!). **Verify the MX records imported correctly** before continuing.
+3. Cloudflare will give you 2 nameservers (e.g. `ana.ns.cloudflare.com` and `bob.ns.cloudflare.com`).
+4. Log into your domain registrar (where you originally bought the domain) and **change the nameservers** to those two values.
+5. Wait for propagation (usually 5 minutes – 24 hours).
+6. After Cloudflare confirms the nameserver change, go back to your Pages project → **Custom domains** → add `newline-pcb.com`. Cloudflare will auto-create the records and issue an SSL cert.
 
-### 2. Repoint DNS at your registrar
+### Path B: Keep the domain at the existing registrar
 
-Replace the existing A/CNAME with:
+If you don't want to move nameservers, just add records at the registrar pointing at Cloudflare Pages:
 
-| Type  | Name | Value                |
-|-------|------|----------------------|
-| A     | @    | 185.199.108.153      |
-| A     | @    | 185.199.109.153      |
-| A     | @    | 185.199.110.153      |
-| A     | @    | 185.199.111.153      |
-| AAAA  | @    | 2606:50c0:8000::153  |
-| AAAA  | @    | 2606:50c0:8001::153  |
-| AAAA  | @    | 2606:50c0:8002::153  |
-| AAAA  | @    | 2606:50c0:8003::153  |
-| CNAME | www  | TriangleMusic.github.io. |
+```
+CNAME   @       newline-pcb.pages.dev    (or apex ALIAS / ANAME if your registrar supports it)
+CNAME   www     newline-pcb.pages.dev
+```
 
-Replace `TriangleMusic` with your GitHub username if different. The trailing `.` on the CNAME is important.
+Some registrars don't support CNAME on the apex (`@`). In that case, **Path A is required**.
 
-> If your registrar is behind Cloudflare, set the proxy status to **DNS only** (grey cloud icon, not orange). GitHub Pages issues its own SSL via Let's Encrypt and that conflicts with Cloudflare proxy.
+### Pre-flight checklist (do 24 hours before)
 
-### 3. Wait for propagation
+- Lower the TTL on existing A/CNAME records to **300 seconds** at the current registrar.
+- Verify your **MX records** for `info@newline-pcb.com`. They must NOT point to Duda's mail servers, or you'll lose email when you cut over.
 
-Most registrars finish within 5 minutes; some take up to a few hours. Check with:
+### Verifying
 
 ```bash
 dig +short newline-pcb.com
-# Should return four 185.199.x.153 IPs
-```
-
-### 4. Enable HTTPS in GitHub
-
-In the repo: **Settings → Pages → Custom domain** — GitHub will run a DNS verification automatically. Once it passes, an "Enforce HTTPS" checkbox appears (this can take 15 minutes to a few hours after DNS propagates). Tick it.
-
-### 5. Verify
-
-```bash
 curl -I https://newline-pcb.com/
+# Should return HTTP/2 200 and Server: cloudflare
 ```
 
-Should return `HTTP/2 200` and `Server: GitHub.com`.
+### Decommissioning Duda
 
-### 6. Decommission Duda
+Wait 48 hours after the cutover with everything working before cancelling Duda. Don't let it auto-renew.
 
-After 48 hours of stable operation on the new site, cancel the Duda subscription. Don't let it auto-renew.
+### Rollback
 
-### Rollback path
-
-If anything breaks post-cutover, restore the previous A/CNAME records at the registrar — the TTL was already lowered to 300s, so propagation is fast.
+If something goes wrong, restore the previous A/CNAME records at the registrar. With TTL=300, traffic flips back within minutes.
 
 ## Adding gallery images
 

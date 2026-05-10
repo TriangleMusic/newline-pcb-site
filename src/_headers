@@ -1,0 +1,24 @@
+# Cloudflare Pages headers — applied per-path at the edge.
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+# Security headers for all responses
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Long-cache hashed/static assets (images, fonts, downloads)
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/css/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/assets/js/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# HTML pages — short cache, validate on each request
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate

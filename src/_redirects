@@ -1,0 +1,19 @@
+# Cloudflare Pages _redirects file
+# https://developers.cloudflare.com/pages/configuration/redirects/
+# Format: <from-path> <to-path> <status-code>
+
+# Preserve legacy Duda URLs (the original site had a typo: "Multy" instead of "Multi")
+/Multy_Layer_PCB        /multilayer-pcb/        301
+/Flex_Rigid_PCB         /flex-rigid-pcb/        301
+/he/Multy_Layer_PCB     /he/multilayer-pcb/     301
+/he/Flex_Rigid_PCB      /he/flex-rigid-pcb/     301
+/he/home                /he/                    301
+
+# Drop the legacy Duda blog placeholder posts (they were never real content)
+/copy-of-10-reasons-you-should-love-blogging-19d8328a8  /        301
+/my-first-blog-postd8894dc2                              /        301
+
+# Trailing-slash normalization (Cloudflare Pages handles this by default,
+# but be explicit for the root pages)
+/about      /about/         301
+/contact    /contact/       301

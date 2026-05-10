@@ -1,0 +1,6 @@
+# Cloudflare Pages configuration.
+# https://developers.cloudflare.com/pages/configuration/build-configuration/
+
+name = "newline-pcb"
+pages_build_output_dir = "_site"
+compatibility_date = "2026-05-10"
