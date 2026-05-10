@@ -1,0 +1,30 @@
+---
+layout: layout-he.njk
+title: "ניוליין פי.סי.בי | מעגלים רב שכבתיים"
+description: "גלריית מעגלים רב שכבתיים — דוגמאות ייצור של מעגלים מודפסים מ-4 עד 14 שכבות מבית ניוליין פי.סי.בי."
+permalink: /he/multilayer-pcb/index.html
+lightbox: true
+---
+
+<section class="page-hero" style="background-image: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-dark));">
+  <div class="container">
+    <h1 class="page-hero__title">מעגלים רב שכבתיים</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="gallery" id="gallery-multilayer-he">
+      {% for n in range(1, 13) %}
+      {% set num = n | string %}
+      {% if n < 10 %}{% set num = "0" + num %}{% endif %}
+      <a href="/assets/img/gallery/multilayer/{{ num }}-full.jpg"
+         data-pswp-width="1920" data-pswp-height="1280"
+         target="_blank" rel="noopener">
+        <img src="/assets/img/gallery/multilayer/{{ num }}-thumb.jpg"
+             alt="מעגל רב שכבתי {{ n }}" loading="lazy">
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

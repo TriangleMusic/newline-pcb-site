@@ -1,0 +1,29 @@
+---
+layout: layout-he.njk
+title: "ניוליין פי.סי.בי | מעגלים גמישים קשיחים"
+description: "גלריית מעגלים גמישים-קשיחים — דוגמאות ייצור מבית ניוליין פי.סי.בי."
+permalink: /he/flex-rigid-pcb/index.html
+lightbox: true
+---
+
+<section class="page-hero" style="background-image: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-dark));">
+  <div class="container">
+    <h1 class="page-hero__title">מעגלים גמישים קשיחים</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="gallery gallery--3col" id="gallery-flexrigid-he">
+      {% for n in range(1, 4) %}
+      {% set num = "0" + (n | string) %}
+      <a href="/assets/img/gallery/flex-rigid/{{ num }}-full.jpg"
+         data-pswp-width="1920" data-pswp-height="1280"
+         target="_blank" rel="noopener">
+        <img src="/assets/img/gallery/flex-rigid/{{ num }}-thumb.jpg"
+             alt="מעגל גמיש-קשיח {{ n }}" loading="lazy">
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

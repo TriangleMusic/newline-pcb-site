@@ -1,0 +1,17 @@
+{
+  "name": "NewLine PCB LTD",
+  "domain": "newline-pcb.com",
+  "url": "https://newline-pcb.com",
+  "phone": "074-7030307",
+  "phoneTel": "+972747030307",
+  "whatsappNumber": "972545454649",
+  "whatsappDisplay": "+972 54-545-4649",
+  "email": "info@newline-pcb.com",
+  "addressEn": "P.O.B 6409, Haifa, Zip: 31063",
+  "addressHe": "ת.ד 6409, חיפה, מיקוד 31063",
+  "social": {
+    "facebook": "https://facebook.com/",
+    "linkedin": "https://linkedin.com/"
+  },
+  "web3formsKey": "YOUR_WEB3FORMS_KEY_HERE"
+}

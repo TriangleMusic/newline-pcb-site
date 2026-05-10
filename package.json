@@ -1,0 +1,19 @@
+{
+  "name": "newline-pcb-site",
+  "version": "1.0.0",
+  "description": "NewLine PCB Ltd. — bilingual (EN/HE) static brochure site, deployed to GitHub Pages.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "eleventy --serve --quiet",
+    "build": "eleventy",
+    "assets": "node scripts/download-assets.mjs",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

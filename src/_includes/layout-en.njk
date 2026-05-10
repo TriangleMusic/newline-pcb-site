@@ -1,0 +1,55 @@
+{% set lang = "en" %}<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ title or site.name }}</title>
+  {% if description %}<meta name="description" content="{{ description }}">{% endif %}
+  {% if keywords %}<meta name="keywords" content="{{ keywords }}">{% endif %}
+  <meta name="theme-color" content="#339AD2">
+
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url | altLangUrl('en') }}">
+  <link rel="alternate" hreflang="he" href="{{ site.url }}{{ page.url | altLangUrl('he') }}">
+  <link rel="alternate" hreflang="x-default" href="{{ site.url }}{{ page.url | altLangUrl('en') }}">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+
+  {# Open Graph / social #}
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ title or site.name }}">
+  {% if description %}<meta property="og:description" content="{{ description }}">{% endif %}
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}/assets/img/og-image.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="he_IL">
+  <meta name="twitter:card" content="summary_large_image">
+
+  {# Fonts #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Open+Sans:wght@300;400;600;700&display=swap">
+
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+</head>
+<body>
+  {% include "header.njk" %}
+
+  <main id="main">
+    {{ content | safe }}
+  </main>
+
+  {% include "footer.njk" %}
+  {% include "whatsapp-fab.njk" %}
+
+  <script src="/assets/js/nav.js" defer></script>
+  <script src="/assets/js/form.js" defer></script>
+  {% if lightbox %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
+  <script type="module" src="/assets/js/lightbox.js"></script>
+  {% endif %}
+</body>
+</html>

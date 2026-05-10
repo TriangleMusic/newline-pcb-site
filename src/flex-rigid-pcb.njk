@@ -1,0 +1,29 @@
+---
+layout: layout-en.njk
+title: "NewLine PCB LTD | Flex Rigid PCB"
+description: "Flex-rigid PCB gallery — production samples of rigid-flex and flexible printed circuit boards manufactured by NewLine-PCB."
+permalink: /flex-rigid-pcb/index.html
+lightbox: true
+---
+
+<section class="page-hero" style="background-image: linear-gradient(135deg, var(--brand-blue), var(--brand-blue-dark));">
+  <div class="container">
+    <h1 class="page-hero__title">Flex Rigid PCB</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="gallery gallery--3col" id="gallery-flexrigid">
+      {% for n in range(1, 4) %}
+      {% set num = "0" + (n | string) %}
+      <a href="/assets/img/gallery/flex-rigid/{{ num }}-full.jpg"
+         data-pswp-width="1920" data-pswp-height="1280"
+         target="_blank" rel="noopener">
+        <img src="/assets/img/gallery/flex-rigid/{{ num }}-thumb.jpg"
+             alt="Flex-rigid PCB sample {{ n }}" loading="lazy">
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

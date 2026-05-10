@@ -1,0 +1,52 @@
+---
+layout: layout-en.njk
+title: "NewLine PCB LTD | Contact"
+description: "Contact NewLine-PCB — phone, email, and contact form. Located in Haifa, Israel."
+permalink: /contact/index.html
+---
+
+<section class="contact-hero" style="background-image: url('/assets/img/pcb-macro.jpg');">
+  <div class="container">
+    <h2>{{ site.name }}</h2>
+    <hr>
+    <p class="contact-hero__cta">Call us now for immediate service!</p>
+    <a class="contact-hero__phone" href="tel:{{ site.phoneTel }}">{{ site.phone }}</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Contact</h2>
+
+        <div class="contact-info__item">
+          <h4>PHONE</h4>
+          <p><a href="tel:{{ site.phoneTel }}">{{ site.phone }}</a></p>
+        </div>
+
+        <div class="contact-info__item">
+          <h4>EMAIL</h4>
+          <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+        </div>
+
+        <div class="contact-info__item">
+          <h4>AREA OF SERVICE</h4>
+          <p>{{ site.addressEn }}</p>
+        </div>
+
+        <div class="contact-info__item">
+          <h4>WHATSAPP</h4>
+          <p><a href="https://wa.me/{{ site.whatsappNumber }}" target="_blank" rel="noopener">{{ site.whatsappDisplay }}</a></p>
+        </div>
+      </div>
+
+      <div class="contact-page-form">
+        {% set formId = "contact-page-en" %}
+        {% set withCompany = true %}
+        {% set submitLabel = "SEND" %}
+        {% include "contact-form.njk" %}
+      </div>
+    </div>
+  </div>
+</section>

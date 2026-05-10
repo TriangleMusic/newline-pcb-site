@@ -1,0 +1,52 @@
+---
+layout: layout-he.njk
+title: "ניוליין פי.סי.בי | צרו קשר"
+description: "צרו קשר עם ניוליין-פי.סי.בי — טלפון, מייל וטופס יצירת קשר. הנהלה בחיפה."
+permalink: /he/contact/index.html
+---
+
+<section class="contact-hero" style="background-image: url('/assets/img/pcb-macro.jpg');">
+  <div class="container">
+    <h2>{{ site.name }}</h2>
+    <hr>
+    <p class="contact-hero__cta">התקשרו אלינו עכשיו לשירות מיידי!</p>
+    <a class="contact-hero__phone" href="tel:{{ site.phoneTel }}">{{ site.phone }}</a>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>צרו קשר</h2>
+
+        <div class="contact-info__item">
+          <h4>טלפון</h4>
+          <p><a href="tel:{{ site.phoneTel }}">{{ site.phone }}</a></p>
+        </div>
+
+        <div class="contact-info__item">
+          <h4>מייל</h4>
+          <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+        </div>
+
+        <div class="contact-info__item">
+          <h4>אזור שירות</h4>
+          <p>{{ site.addressHe }}</p>
+        </div>
+
+        <div class="contact-info__item">
+          <h4>WHATSAPP</h4>
+          <p><a href="https://wa.me/{{ site.whatsappNumber }}" target="_blank" rel="noopener">{{ site.whatsappDisplay }}</a></p>
+        </div>
+      </div>
+
+      <div class="contact-page-form">
+        {% set formId = "contact-page-he" %}
+        {% set withCompany = true %}
+        {% set submitLabel = "שלח" %}
+        {% include "contact-form.njk" %}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,48 @@
+/* RTL overrides — loaded only on Hebrew pages
+   Logical properties (inset-inline-*, padding-inline-*, etc.) handle
+   most cases automatically. This file is for the few visual flips
+   that don't fall out of logical-property usage. */
+
+[dir="rtl"] {
+  /* Hebrew tends to need slightly tighter line-height than Latin */
+  --line-height-body: 1.65;
+}
+
+[dir="rtl"] body {
+  font-family: "Open Sans Hebrew", "Source Sans Pro", "Open Sans", system-ui, sans-serif;
+}
+
+[dir="rtl"] .topbar__inner {
+  flex-direction: row-reverse;
+}
+
+/* Mirror the CTA underline and anything that uses ::after pseudos
+   for decorative left-anchored elements */
+[dir="rtl"] .contact-info h2::after {
+  inset-inline-end: auto;
+  inset-inline-start: 0;
+}
+
+/* WhatsApp FAB always bottom-end — already correct via inset-inline-end */
+
+/* Form alignment */
+[dir="rtl"] .contact-form input,
+[dir="rtl"] .contact-form textarea {
+  text-align: right;
+}
+
+/* Hebrew tends to have slightly higher visual weight at the same
+   font-size as Latin. Compensate by reducing heading sizes ~5%. */
+[dir="rtl"] h1 { letter-spacing: 0; }
+[dir="rtl"] h2 { letter-spacing: 0; }
+[dir="rtl"] h3 { letter-spacing: 0; }
+
+[dir="rtl"] .nav__link {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .btn {
+  letter-spacing: 0;
+  text-transform: none;
+}

@@ -1,0 +1,19 @@
+{# Reusable contact form. Args via set: formId (required), formClass (optional), withCompany (bool), submitLabel #}
+{% set t = i18n[lang] %}
+<form class="contact-form {{ formClass }}" id="{{ formId }}" method="POST" novalidate>
+  <input type="hidden" name="access_key" value="{{ site.web3formsKey }}">
+  <input type="hidden" name="subject" value="New contact from {{ site.domain }} ({{ formId }})">
+  <input type="hidden" name="from_name" value="{{ site.domain }}">
+  <input type="hidden" name="redirect" value="false">
+  {# Honeypot — hidden from real users, bots fill it. #}
+  <input type="checkbox" name="botcheck" class="contact-form__honeypot" tabindex="-1" autocomplete="off">
+
+  <input type="text"     name="name"  placeholder="{{ t.form.name }}"  required autocomplete="name">
+  <input type="tel"      name="phone" placeholder="{{ t.form.phone }}" required autocomplete="tel">
+  <input type="email"    name="email" placeholder="{{ t.form.email }}" required autocomplete="email">
+  {% if withCompany %}<input type="text" name="company" placeholder="{{ t.form.company }}" autocomplete="organization">{% endif %}
+  <textarea name="message" placeholder="{{ t.form.details if withCompany else t.form.message }}" required></textarea>
+
+  <button type="submit" class="btn btn--submit">{{ submitLabel or t.form.submit }}</button>
+  <div class="form-status" role="status" aria-live="polite"></div>
+</form>

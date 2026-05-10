@@ -1,0 +1,52 @@
+{% set t = i18n[lang] %}
+{% set isHe = (lang == "he") %}
+{% set address = site.addressHe if isHe else site.addressEn %}
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__inner">
+      <div class="site-footer__logo">
+        <img src="/assets/img/logo-white.png" alt="{{ site.name }}" width="380" height="55" loading="lazy">
+        <div class="site-footer__social">
+          <a href="{{ site.social.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-7H8v-2.88h2.44V9.84c0-2.41 1.43-3.74 3.62-3.74 1.05 0 2.15.19 2.15.19v2.36h-1.21c-1.19 0-1.56.74-1.56 1.5v1.8h2.65L15.66 14.88h-2.22v7A10 10 0 0 0 22 12z"/></svg>
+          </a>
+          <a href="{{ site.social.linkedin }}" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0H5a5 5 0 0 0-5 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5zM8 19H5V8h3v11zM6.5 6.73a1.77 1.77 0 1 1 0-3.55 1.77 1.77 0 0 1 0 3.55zM20 19h-3v-5.6c0-3.37-4-3.12-4 0V19h-3V8h3v1.77c1.4-2.59 7-2.78 7 2.48V19z"/></svg>
+          </a>
+          <a href="mailto:{{ site.email }}" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="site-footer__info">
+        <div class="site-footer__info-item">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+          <div>
+            <h4>{{ t.footer.address }}</h4>
+            <p>{{ address }}</p>
+          </div>
+        </div>
+        <div class="site-footer__info-item">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.05-.24c1.16.39 2.4.6 3.69.6a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A18 18 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.29.21 2.53.6 3.69a1 1 0 0 1-.24 1.05l-2.24 2.05Z"/></svg>
+          <div>
+            <h4>{{ t.footer.phone }}</h4>
+            <p><a href="tel:{{ site.phoneTel }}">{{ site.phone }}</a></p>
+          </div>
+        </div>
+        <div class="site-footer__info-item">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <div>
+            <h4>{{ t.footer.email }}</h4>
+            <p><a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      &copy; {{ "" | year }} {{ site.name }}. {{ t.footer.copyright }}.
+    </div>
+  </div>
+</footer>
