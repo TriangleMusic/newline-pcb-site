@@ -1,17 +1,21 @@
+# Build output & dependencies
 node_modules/
 _site/
-.DS_Store
-.env
-.env.local
-*.log
 .cache/
 
-# Reference material (not committed - see README)
-*.jpeg
-*.png.bak
-.playwright-mcp/
-data/
+# Secrets
+.env
+.env.local
 
-# IDE
+# Local backups / archives (kept on disk, not in git)
+backups/
+
+# Reference material & dev artifacts (kept on disk, not in git)
+docs/screenshots/
+docs/dev-logs/
+
+# OS / editor
+.DS_Store
+*.log
 .vscode/
 .idea/
