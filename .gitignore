@@ -8,7 +8,8 @@ _site/
 .env.local
 
 # Local backups / archives (kept on disk, not in git)
-backups/
+backups/*
+!backups/README.md
 
 # Reference material & dev artifacts (kept on disk, not in git)
 docs/screenshots/
